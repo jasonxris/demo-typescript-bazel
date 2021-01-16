@@ -1,0 +1,71 @@
+{
+    "name": "bazel-Language-Server",
+    "description": "A language server for Bazel",
+    "author": "Jason Gillett",
+    "license": "MIT",
+    "version": "1.0.0",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "publisher": "",
+    "categories": [],
+    "keywords": [
+        "multi-root ready"
+    ],
+    "engines": {
+        "vscode": "^1.43.0"
+    },
+    "activationEvents": [
+        "onLanguage:plaintext"
+    ],
+    "main": "./client/out/extension",
+    "contributes": {
+        "grammars": [
+            {
+                "language": "starlark",
+                "scopeName": "source.starlark",
+                "path": "./client/syntaxes/starlark.tmLanguage.json"
+            }
+        ],
+        "languages": [
+            {
+                "id": "starlark",
+                "aliases": [
+                    "Starlark",
+                    "starlark",
+                    "Bazel"
+                ],
+                "extensions": [
+                    ".BUILD",
+                    ".WORKSPACE",
+                    ".bzl",
+                    ".sky",
+                    ".star"
+                ],
+                "filenames": [
+                    "BUILD",
+                    "BUILD.bazel",
+                    "WORKSPACE",
+                    "WORKSPACE.bazel"
+                ],
+                "configuration": "./client/syntaxes/starlark.configuration.json"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -b",
+        "watch": "tsc -b -w",
+        "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+        "test": "sh ./scripts/e2e.sh"
+    },
+    "devDependencies": {
+        "@types/mocha": "^8.0.3",
+        "mocha": "^8.1.1",
+        "@types/node": "^12.12.0",
+        "eslint": "^6.4.0",
+        "@typescript-eslint/parser": "^2.3.0",
+        "typescript": "^4.0.2"
+    }
+}
